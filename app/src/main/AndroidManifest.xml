@@ -17,10 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewParty" />
-        <activity
-            android:name=".CurrentParties"
-            android:label="@string/title_activity_current_parties"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".CurrentParties"></activity>
     </application>
 
 </manifest>
