@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, NewParty.class);
         startActivity(intent);
     }
+
+    public void newParty(View view){
+        Intent intent = new Intent(MainActivity.this, CurrentParties.class);
+        startActivity(intent);
+    }
 }
