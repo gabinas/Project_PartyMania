@@ -20,7 +20,8 @@
         <activity
             android:name=".CurrentParties"
             android:label="@string/title_activity_current_parties"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ViewParty"></activity>
     </application>
 
 </manifest>
