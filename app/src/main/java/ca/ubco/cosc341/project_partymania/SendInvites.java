@@ -1,5 +1,6 @@
 package ca.ubco.cosc341.project_partymania;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -36,13 +37,20 @@ public class SendInvites extends AppCompatActivity {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         String name = menuItem.getTitle().toString();
-
+                        Intent intent;
                         switch (name) {
                             case "Home":
                                 finish();
                                 break;
                             case "Current Parties":
-                                Toast.makeText(SendInvites.this, "No current parties", Toast.LENGTH_SHORT).show();
+                                intent = new Intent(SendInvites.this, CurrentParties.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
+                                break;
+                            case "Create Party":
+                                intent = new Intent(SendInvites.this, NewParty.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
                                 break;
                         }
                         // close drawer when item is tapped
