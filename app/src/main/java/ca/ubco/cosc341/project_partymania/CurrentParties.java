@@ -1,5 +1,6 @@
 package ca.ubco.cosc341.project_partymania;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -79,6 +81,17 @@ public class CurrentParties extends AppCompatActivity {
                 }
         );
 
+        // dummy code to read in party titles
+        String fileContents= "MyParty\nMySecondPArty\nMyTurdParty";
+        FileOutputStream outputStream; //allow a file to be opened for writing
+        try {outputStream= openFileOutput("partyTitles.txt", Context.MODE_APPEND);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+            this.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Exception",Toast.LENGTH_SHORT).show();
+        }
         // create buttons for each party that is available
         try {
             FileInputStream fis= openFileInput("partyTitles.txt");
