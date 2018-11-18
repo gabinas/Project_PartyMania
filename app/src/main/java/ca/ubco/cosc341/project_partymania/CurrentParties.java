@@ -9,11 +9,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CurrentParties extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    ArrayList<Button> buttons;
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener(){
+        public void onClick(View v){
+            ViewParty();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +74,33 @@ public class CurrentParties extends AppCompatActivity {
                 }
         );
 
+        // create buttons for each party that is available
+        try {
+            FileInputStream fis= openFileInput("partyTitles.txt");
+            InputStreamReader isr= new InputStreamReader(fis);
+            BufferedReader br= new BufferedReader(isr);
+            String line = br.readLine();
+
+            // initialize length of array list
+            buttons = new ArrayList<>();
+            int i = 0;
+
+            while (line != null) {
+                line = br.readLine();
+                buttons.add(new Button(this));
+                buttons.get(i).setText(line);
+                buttons.get(i).setOnClickListener(buttonClickListener);
+            }
+            br.close();
+        } catch (IOException e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "No current parties. Create a new party!", Toast.LENGTH_LONG).show();
+        }
     }
 
+    private void ViewParty(){
+        
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
