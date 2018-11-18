@@ -1,6 +1,7 @@
 package ca.ubco.cosc341.project_partymania;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,10 +26,12 @@ public class CurrentParties extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     ArrayList<Button> buttons;
+    LinearLayout linearLayout;
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener(){
         public void onClick(View v){
-            ViewParty();
+            Object tag = v.getTag();
+            ViewParty(tag);
         }
     };
 
@@ -37,6 +41,7 @@ public class CurrentParties extends AppCompatActivity {
         setContentView(R.layout.activity_new_party);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        linearLayout = findViewById(R.id.linear_layout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,7 +94,11 @@ public class CurrentParties extends AppCompatActivity {
                 line = br.readLine();
                 buttons.add(new Button(this));
                 buttons.get(i).setText(line);
+                buttons.get(i).setText(line);
+                buttons.get(i).setText(line);
+                buttons.get(i).setText(line);
                 buttons.get(i).setOnClickListener(buttonClickListener);
+                linearLayout.addView(buttons.get(i));
             }
             br.close();
         } catch (IOException e){
@@ -98,8 +107,8 @@ public class CurrentParties extends AppCompatActivity {
         }
     }
 
-    private void ViewParty(){
-        
+    private void ViewParty(Object tag){
+        Toast.makeText(getApplicationContext(), "Hello. Nice try", Toast.LENGTH_LONG).show();
     }
 
     @Override
