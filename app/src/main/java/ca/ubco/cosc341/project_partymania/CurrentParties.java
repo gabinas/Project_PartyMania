@@ -31,7 +31,7 @@ public class CurrentParties extends AppCompatActivity {
     private View.OnClickListener buttonClickListener = new View.OnClickListener(){
         public void onClick(View v){
             Object tag = v.getTag();
-            ViewParty(tag);
+            buttonClick(tag);
         }
     };
 
@@ -94,9 +94,9 @@ public class CurrentParties extends AppCompatActivity {
                 line = br.readLine();
                 buttons.add(new Button(this));
                 buttons.get(i).setText(line);
-                buttons.get(i).setText(line);
-                buttons.get(i).setText(line);
-                buttons.get(i).setText(line);
+                buttons.get(i).setHeight(50);
+                buttons.get(i).setWidth(50);
+                buttons.get(i).setTag(i);
                 buttons.get(i).setOnClickListener(buttonClickListener);
                 linearLayout.addView(buttons.get(i));
             }
@@ -107,8 +107,9 @@ public class CurrentParties extends AppCompatActivity {
         }
     }
 
-    private void ViewParty(Object tag){
+    private void buttonClick(Object tag){
         Toast.makeText(getApplicationContext(), "Hello. Nice try", Toast.LENGTH_LONG).show();
+        //Intent intent = new Intent(this.getClass(), ViewParty();)
     }
 
     @Override
