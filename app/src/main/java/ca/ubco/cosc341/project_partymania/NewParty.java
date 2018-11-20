@@ -124,6 +124,13 @@ public class NewParty extends AppCompatActivity {
         String pmonth = mon.getSelectedItem().toString();
         String pyear = yea.getSelectedItem().toString();
 
+        if(partyTitle.length() > 0 && partyLocation.length()>0
+                && pday.length()>0 && pmonth.length() > 0 && pyear.length() > 0){
+            newParty(view);
+        } else{
+            Toast.makeText(getApplicationContext(), "You must fill all fields", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void newParty(View view){
@@ -155,13 +162,15 @@ public class NewParty extends AppCompatActivity {
             outputStream.write(fileContents.getBytes());
             outputStream.close();
 
-            fileContents = partyLocation+" \n "+pday+" \n "+pmonth+" \n "+pyear+" \n";
+            fileContents = partyLocation+" \n"+pday+" \n"+pmonth+" \n"+pyear+" \n";
             outputStream= openFileOutput(fileName, Context.MODE_APPEND);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        finish();
 
 
     }
