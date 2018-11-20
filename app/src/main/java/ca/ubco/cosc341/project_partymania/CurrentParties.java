@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -27,15 +28,7 @@ import java.util.Arrays;
 public class CurrentParties extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    ArrayList<Button> buttons;
     LinearLayout linearLayout;
-
-    private View.OnClickListener buttonClickListener = new View.OnClickListener(){
-        public void onClick(View v){
-            Object tag = v.getTag();
-            buttonClick(tag);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,19 +92,31 @@ public class CurrentParties extends AppCompatActivity {
             BufferedReader br= new BufferedReader(isr);
             String line = br.readLine();
 
-            // initialize length of array list
-            buttons = new ArrayList<>();
             int i = 0;
+            Button btn1;
 
+            // dynamically add buttons for parties
             while (line != null) {
                 line = br.readLine();
-                buttons.add(new Button(this));
-                buttons.get(i).setText(line);
-                buttons.get(i).setHeight(50);
-                buttons.get(i).setWidth(50);
-                buttons.get(i).setTag(i);
-                buttons.get(i).setOnClickListener(buttonClickListener);
-                linearLayout.addView(buttons.get(i));
+                Button button = new Button(this);
+               button.setText(line);
+                button.setId(i);
+                final int id_ = button.getId();
+                final String partyName = button.getText().toString();
+                button.setHeight(50);
+                button.setWidth(50);
+                button.setTag(i);
+                LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                linearLayout.addView(button, lp);
+                btn1 = ((Button) findViewById(id_));
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(),
+                                "Button clicked index = " + partyName, Toast.LENGTH_SHORT)
+                                .show();
+                        showParty(partyName);
+                    }
+                });
             }
             br.close();
         } catch (IOException e){
@@ -120,9 +125,12 @@ public class CurrentParties extends AppCompatActivity {
         }
     }
 
-    private void buttonClick(Object tag){
+    private void showParty(String partyName){
         Toast.makeText(getApplicationContext(), "Hello. Nice try", Toast.LENGTH_LONG).show();
-        //Intent intent = new Intent(this.getClass(), ViewParty();)
+        Intent intent = new Intent(CurrentParties.this , this.getClass());
+        intent.putExtra("partyName", partyName);
+        startActivity(intent);
+
     }
 
     @Override
