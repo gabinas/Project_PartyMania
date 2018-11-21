@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewParty" />
-        <activity android:name=".CurrentParties"></activity>
+        <activity android:name=".CurrentParties" />
+        <activity android:name=".SendInvites2"></activity>
     </application>
 
 </manifest>
