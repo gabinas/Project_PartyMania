@@ -96,7 +96,7 @@ public class CurrentParties extends AppCompatActivity {
             String line = "";
 
             int i = 0;
-            Button btn1;
+
 
             // dynamically add buttons for parties
             while (line != null) {
@@ -113,6 +113,7 @@ public class CurrentParties extends AppCompatActivity {
                         showParty(partyName);
                     }
                 });
+                i++;
             }
             br.close();
         } catch (IOException e){

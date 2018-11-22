@@ -34,11 +34,6 @@ public class ViewParty extends AppCompatActivity {
     TextView date;
     TextView details;
 
-    String text1;
-    String text2;
-    String text3;
-    String text4;
-
     String filename;
 
     Button delete;
@@ -96,7 +91,9 @@ public class ViewParty extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String filename = intent.getStringExtra("partyName");
+        String partyTitle = intent.getStringExtra("partyName");
+        String fileName = partyTitle.replaceAll("\\s+","")+".txt";  //Name of the details file
+
 
         name = (TextView)findViewById(R.id.textName);
         location = (TextView)findViewById(R.id.textLocation);
@@ -117,7 +114,8 @@ public class ViewParty extends AppCompatActivity {
             BufferedReader br= new BufferedReader(isr);
             String line = br.readLine();
             list = new ArrayList<>();
-            while (line != null) {
+            String text;
+            while ((text = br.readLine()) != null) {
                 list.add(line);
                 Toast.makeText(getApplicationContext(), line, Toast.LENGTH_LONG).show();
                 line = br.readLine();
