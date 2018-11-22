@@ -16,13 +16,18 @@ import android.widget.Toast;
 
 public class SendInvites extends AppCompatActivity {
     boolean timedate, location, potluck, message;
-
+    String partyName;
     private DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_invites);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        partyName =  bundle.getString("partyName");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,8 +48,11 @@ public class SendInvites extends AppCompatActivity {
                         Intent intent;
                         switch (name) {
                             case "Home":
-                                finish();
+                                intent = new Intent(SendInvites.this, MainActivity.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
                                 break;
+
                             case "Current Parties":
                                 intent = new Intent(SendInvites.this, CurrentParties.class);
                                 finish();  //Kill the activity from which you will go to next activity
@@ -97,6 +105,7 @@ public class SendInvites extends AppCompatActivity {
         bundle.putBoolean("potluck", potluck);
         bundle.putBoolean("message",message);
         bundle.putString("msg", msg);
+        bundle.putString("partyName", partyName);
 
         intent.putExtras(bundle);
         startActivity(intent);

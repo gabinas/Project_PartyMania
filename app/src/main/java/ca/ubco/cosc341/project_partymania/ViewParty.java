@@ -1,10 +1,16 @@
 package ca.ubco.cosc341.project_partymania;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ViewParty extends AppCompatActivity {
+
+    private DrawerLayout mDrawerLayout;
+    LinearLayout linearLayout;
 
     TextView name;
     TextView location;
@@ -43,6 +52,46 @@ public class ViewParty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_party);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        linearLayout = findViewById(R.id.linear_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        String name = menuItem.getTitle().toString();
+
+                        switch (name) {
+                            case "Home":
+                                finish();
+                                break;
+                            case "Current Parties":
+                                Toast.makeText(CurrentParties.this, "No current parties", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+
+                        return true;
+                    }
+                }
+        );
+
 
         Intent intent = getIntent();
         String filename = intent.getStringExtra("partyName");

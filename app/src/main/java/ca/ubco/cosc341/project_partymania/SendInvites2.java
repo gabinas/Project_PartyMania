@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 public class SendInvites2 extends AppCompatActivity {
     boolean timedate, location, potluck, message;
-    String msg;
+    String msg, partyName;
     private DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class SendInvites2 extends AppCompatActivity {
             msg = extras.getString("msg");
         else
             msg = "";
+        partyName = extras.getString("partyName");
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -51,7 +52,9 @@ public class SendInvites2 extends AppCompatActivity {
                         Intent intent;
                         switch (name) {
                             case "Home":
-                                finish();
+                                intent = new Intent(SendInvites2.this, MainActivity.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
                                 break;
                             case "Current Parties":
                                 intent = new Intent(SendInvites2.this, CurrentParties.class);
@@ -80,7 +83,7 @@ public class SendInvites2 extends AppCompatActivity {
     public void Next(View view){
         Intent intent = new Intent(this, SendInvites3.class);
 
-        EditText messagetext = findViewById(R.id.messagetext);
+        EditText messagetext = findViewById(R.id.emailList);
         String emailList = messagetext.getText().toString();
         Bundle bundle = new Bundle();
         bundle.putBoolean("timedate",timedate);
@@ -89,9 +92,13 @@ public class SendInvites2 extends AppCompatActivity {
         bundle.putBoolean("message",message);
         bundle.putString("msg", msg);
         bundle.putString("emailList",emailList);
-
+        bundle.putString("partyName",partyName);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    public void Previous(View view){
+        finish();
     }
 
 }
