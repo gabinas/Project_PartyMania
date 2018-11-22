@@ -52,25 +52,30 @@
                     android:id="@+id/timedate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rsvp_rg_1" />
+                    android:text="@string/rsvp_rg_1"
+                    android:onClick="onCheckboxClicked"
+                    />
 
                 <CheckBox
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rsvp_rg_2" />
+                    android:text="@string/rsvp_rg_2"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/potluck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rsvp_rg_4" />
+                    android:text="@string/rsvp_rg_4"
+                    android:onClick="onCheckboxClicked"/>
 
                 <CheckBox
                     android:id="@+id/message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rsvp_rg_5" />
+                    android:text="@string/rsvp_rg_5"
+                    android:onClick="onCheckboxClicked"/>
 
             </LinearLayout>
 
