@@ -9,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class SendInvites extends AppCompatActivity {
-
+    boolean timedate, location, potluck, message;
 
     private DrawerLayout mDrawerLayout;
     @Override
@@ -74,4 +77,63 @@ public class SendInvites extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void Cancel(View view){
+        finish();
+    }
+
+    public void Next(View view){
+
+        Intent intent = new Intent(this, SendInvites2.class);
+        EditText messagetext = null;
+        if(message) {
+            messagetext = findViewById(R.id.messagetext);
+        }
+        String msg = messagetext.getText().toString();
+        intent.putExtra("timedate",timedate);
+        intent.putExtra("location",location);
+        intent.putExtra("potluck", potluck);
+        intent.putExtra("message",message);
+
+    }
+
+    //Checkbox implementation
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.timedate:
+                if (checked)
+                    timedate = true;
+                else
+                    timedate = false;
+                break;
+            case R.id.location:
+                if (checked)
+                    location = true;
+                // Cheese me
+                else
+                    location = false;
+                // I'm lactose intolerant
+                break;
+
+            case R.id.potluck:
+                if(checked)
+                    potluck = true;
+                else
+                    potluck = false;
+                break;
+            case R.id.message:
+                if(checked)
+                    message = true;
+                else
+                    message = false;
+                break;
+
+        }
+    }
+
+
 }
