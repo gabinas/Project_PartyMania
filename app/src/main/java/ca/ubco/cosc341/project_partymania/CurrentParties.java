@@ -110,7 +110,7 @@ public class CurrentParties extends AppCompatActivity {
 
     private void showParty(String partyName){
         Toast.makeText(getApplicationContext(), "Hello. Nice try " + partyName, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(CurrentParties.this , this.getClass());
+        Intent intent = new Intent(CurrentParties.this ,ViewParty.class);
         intent.putExtra("partyName", partyName);
         startActivity(intent);
 
