@@ -34,17 +34,12 @@ public class ViewParty extends AppCompatActivity {
     TextView date;
     TextView details;
 
-    String text1;
-    String text2;
-    String text3;
-    String text4;
-
     String filename;
 
     Button delete;
     Button invite;
 
-    ArrayList<String> data= new ArrayList<>();
+   // ArrayList<String> data= new ArrayList<>();
     int j = 0;
     List<String> list;
 
@@ -78,7 +73,9 @@ public class ViewParty extends AppCompatActivity {
                                 finish();
                                 break;
                             case "Current Parties":
-                                Toast.makeText(CurrentParties.this, "No current parties", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ViewParty.this, CurrentParties.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
                                 break;
                         }
                         // close drawer when item is tapped
@@ -94,7 +91,9 @@ public class ViewParty extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String filename = intent.getStringExtra("partyName");
+        String partyTitle = intent.getStringExtra("partyName");
+        String fileName = partyTitle.replaceAll("\\s+","")+".txt";  //Name of the details file
+
 
         name = (TextView)findViewById(R.id.textName);
         location = (TextView)findViewById(R.id.textLocation);
@@ -114,21 +113,28 @@ public class ViewParty extends AppCompatActivity {
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
             String line = br.readLine();
-            while (line != null) {
-                data.add(line);
+            list = new ArrayList<>();
+            String text;
+            while ((text = br.readLine()) != null) {
+                list.add(line);
+                Toast.makeText(getApplicationContext(), line, Toast.LENGTH_LONG).show();
                 line = br.readLine();
             }
             br.close();
-            list = new ArrayList<String>(Arrays.asList(data.get(j).split(",")));
-            text1 = list.get(0);
-            text2 = list.get(1);
-            text3 = list.get(2);
-            text4 = list.get(3);
 
-            name.setText(text1);
-            location.setText(text2);
-            date.setText(text3);
-            details.setText(text4);
+            name.setText(list.get(0));
+            Toast.makeText(getApplicationContext(), list.get(0), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), list.get(1), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), list.get(2), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
+//            text2 = list.get(1);
+//            text3 = list.get(2);
+//            text4 = list.get(3);
+
+            name.setText(list.get(0));
+            location.setText(list.get(1));
+            date.setText(list.get(2));
+//            details.setText(list.get(3));
 
         } catch (IOException e){
             e.printStackTrace();
