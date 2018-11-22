@@ -34,8 +34,8 @@ public class ViewParty extends AppCompatActivity {
     TextView date;
     TextView details;
 
-    String filename;
 
+    String filename;
     Button delete;
     Button invite;
 
@@ -92,7 +92,8 @@ public class ViewParty extends AppCompatActivity {
 
         Intent intent = getIntent();
         String partyTitle = intent.getStringExtra("partyName");
-        String fileName = partyTitle.replaceAll("\\s+","")+".txt";  //Name of the details file
+        filename = partyTitle.replaceAll("\\s+","")+".txt";  //Name of the details file
+
 
 
         name = (TextView)findViewById(R.id.textName);
@@ -109,27 +110,18 @@ public class ViewParty extends AppCompatActivity {
         });
 
         try{
-            FileInputStream fis= openFileInput(filename + ".txt");
+            FileInputStream fis= openFileInput(filename);
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
             String line = br.readLine();
             list = new ArrayList<>();
-            String text;
-            while ((text = br.readLine()) != null) {
+
+            while (line != null) {
                 list.add(line);
                 Toast.makeText(getApplicationContext(), line, Toast.LENGTH_LONG).show();
                 line = br.readLine();
             }
             br.close();
-
-            name.setText(list.get(0));
-            Toast.makeText(getApplicationContext(), list.get(0), Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), list.get(1), Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), list.get(2), Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
-//            text2 = list.get(1);
-//            text3 = list.get(2);
-//            text4 = list.get(3);
 
             name.setText(list.get(0));
             location.setText(list.get(1));
@@ -153,7 +145,9 @@ public class ViewParty extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("partyName",filename);
         intent.putExtras(bundle);
+        finish();
         startActivity(intent);
+
     }
 
 }
