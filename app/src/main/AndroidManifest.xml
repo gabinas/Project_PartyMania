@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".NewParty" />
         <activity android:name=".CurrentParties" />
+        <activity android:name=".SendInvites2" />
+        <activity android:name=".SendInvites3"></activity>
         <activity android:name=".ViewParty"></activity>
     </application>
 

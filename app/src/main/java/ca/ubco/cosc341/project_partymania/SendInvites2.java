@@ -2,20 +2,14 @@ package ca.ubco.cosc341.project_partymania;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Toast;
 
-public class SendInvites extends AppCompatActivity {
-    boolean timedate, location, potluck, message;
+public class SendInvites2 extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     @Override
@@ -46,12 +40,12 @@ public class SendInvites extends AppCompatActivity {
                                 finish();
                                 break;
                             case "Current Parties":
-                                intent = new Intent(SendInvites.this, CurrentParties.class);
+                                intent = new Intent(SendInvites2.this, CurrentParties.class);
                                 finish();  //Kill the activity from which you will go to next activity
                                 startActivity(intent);
                                 break;
                             case "Create Party":
-                                intent = new Intent(SendInvites.this, NewParty.class);
+                                intent = new Intent(SendInvites2.this, NewParty.class);
                                 finish();  //Kill the activity from which you will go to next activity
                                 startActivity(intent);
                                 break;
@@ -67,73 +61,4 @@ public class SendInvites extends AppCompatActivity {
                 }
         );
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void Cancel(View view){
-        finish();
-    }
-
-    public void Next(View view){
-
-        Intent intent = new Intent(this, SendInvites2.class);
-        EditText messagetext = null;
-        if(message) {
-            messagetext = findViewById(R.id.messagetext);
-        }
-        String msg = messagetext.getText().toString();
-        intent.putExtra("timedate",timedate);
-        intent.putExtra("location",location);
-        intent.putExtra("potluck", potluck);
-        intent.putExtra("message",message);
-
-    }
-
-    //Checkbox implementation
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.timedate:
-                if (checked)
-                    timedate = true;
-                else
-                    timedate = false;
-                break;
-            case R.id.location:
-                if (checked)
-                    location = true;
-                // Cheese me
-                else
-                    location = false;
-                // I'm lactose intolerant
-                break;
-
-            case R.id.potluck:
-                if(checked)
-                    potluck = true;
-                else
-                    potluck = false;
-                break;
-            case R.id.message:
-                if(checked)
-                    message = true;
-                else
-                    message = false;
-                break;
-
-        }
-    }
-
-
 }
