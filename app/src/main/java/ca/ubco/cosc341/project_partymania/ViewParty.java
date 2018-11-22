@@ -52,14 +52,6 @@ public class ViewParty extends AppCompatActivity {
         date = (TextView)findViewById(R.id.textDate);
         details = (TextView)findViewById(R.id.textDetails);
 
-        delete = (Button)findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteParty();
-            }
-        });
-
         invite = (Button)findViewById(R.id.sendInvites);
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,17 +86,19 @@ public class ViewParty extends AppCompatActivity {
         }
 
     }
-    public void deleteParty(){
+    public void deleteParty(View view){
         File file = new File(getFilesDir(),filename+".txt");
         deleteFile(filename+".txt");
-        Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
+        Toast.makeText(getApplicationContext(),"File deleted",Toast.LENGTH_SHORT);
     }
 
     public void openSendInvites(){
+
         Intent intent = new Intent(this,SendInvites.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("partyName",filename);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
 }
-
-
