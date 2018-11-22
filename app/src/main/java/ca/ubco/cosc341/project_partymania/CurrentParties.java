@@ -93,7 +93,7 @@ public class CurrentParties extends AppCompatActivity {
             FileInputStream fis= openFileInput("partyTitles.txt");
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
-            String line = br.readLine();
+            String line = "";
 
             int i = 0;
             Button btn1;
@@ -106,9 +106,6 @@ public class CurrentParties extends AppCompatActivity {
                 button.setId(i);
                 final int id_ = button.getId();
                 final String partyName = button.getText().toString();
-                button.setHeight(50);
-                button.setWidth(50);
-                button.setTag(i);
                 LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 linearLayout.addView(button, lp);
                 button.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +125,7 @@ public class CurrentParties extends AppCompatActivity {
     }
 
     private void showParty(String partyName){
-        Toast.makeText(getApplicationContext(), "Hello. Nice try " + partyName, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "Going to " + partyName, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(CurrentParties.this , ViewParty.class);
         intent.putExtra("partyName", partyName);
         finish();
