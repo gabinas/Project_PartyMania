@@ -113,8 +113,9 @@ public class SendInvites3 extends AppCompatActivity {
     public void ShowPreview(){
         TextView PTitle = findViewById(R.id.PTitle);
         PTitle.setText(partyName);
+        String fileName = partyName.replaceAll("\\s+","")+".txt";
         try {
-            FileInputStream fis= openFileInput("partyTitles.txt");
+            FileInputStream fis= openFileInput(fileName);
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
             String line = br.readLine();

@@ -94,9 +94,7 @@ public class SendInvites extends AppCompatActivity {
 
         Intent intent = new Intent(this, SendInvites2.class);
         EditText messagetext = null;
-        if(message) {
-            messagetext = findViewById(R.id.messagetext);
-        }
+        messagetext = findViewById(R.id.messagetext);
         String msg = messagetext.getText().toString();
 
         Bundle bundle = new Bundle();
