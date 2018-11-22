@@ -19,6 +19,11 @@
     <string name="rsvp_review_b">Review</string>
     <string name="rsvp_head_2">Who is coming?</string>
     <string name="rsvp_sendemailtext">Send by email:</string>
+    <string name = "rsvp_head_3">Preview</string>
+    <string name="previous">Previous</string>
+    <string name="Next">Next</string>
+    <string name="sendInvite">Send Invites</string>
+    <string name="cancel">Cancel</string>
     <string-array name="day">
         <item name="1">1</item>
         <item name="2">2</item>
