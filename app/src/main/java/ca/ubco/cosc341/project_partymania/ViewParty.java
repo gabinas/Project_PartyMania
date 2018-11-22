@@ -89,11 +89,15 @@ public class ViewParty extends AppCompatActivity {
     public void deleteParty(View view){
         File file = new File(getFilesDir(),filename+".txt");
         deleteFile(filename+".txt");
-        Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
+        Toast.makeText(getApplicationContext(),"File deleted",Toast.LENGTH_SHORT);
     }
 
     public void openSendInvites(){
+
         Intent intent = new Intent(this,SendInvites.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("partyName",filename);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
