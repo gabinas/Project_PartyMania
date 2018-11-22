@@ -33,7 +33,7 @@ public class CurrentParties extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_party);
+        setContentView(R.layout.activity_current_parties);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         linearLayout = findViewById(R.id.linear_layout);
@@ -77,17 +77,17 @@ public class CurrentParties extends AppCompatActivity {
                 }
         );
 
-        // dummy code to read in party titles
-        String fileContents= "MyParty\nMySecondPArty\nMyTurdParty";
-        FileOutputStream outputStream; //allow a file to be opened for writing
-        try {outputStream= openFileOutput("partyTitles.txt", Context.MODE_APPEND);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-            this.finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Exception",Toast.LENGTH_SHORT).show();
-        }
+//        // dummy code to read in party titles
+//        String fileContents= "MyParty\nMySecondPArty\nMyTurdParty";
+//        FileOutputStream outputStream; //allow a file to be opened for writing
+//        try {outputStream= openFileOutput("partyTitles.txt", Context.MODE_APPEND);
+//            outputStream.write(fileContents.getBytes());
+//            outputStream.close();
+//            this.finish();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toast.makeText(getApplicationContext(), "Exception",Toast.LENGTH_SHORT).show();
+//        }
         // create buttons for each party that is available
         try {
             FileInputStream fis= openFileInput("partyTitles.txt");
@@ -111,12 +111,8 @@ public class CurrentParties extends AppCompatActivity {
                 button.setTag(i);
                 LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 linearLayout.addView(button, lp);
-                btn1 = ((Button) findViewById(id_));
-                btn1.setOnClickListener(new View.OnClickListener() {
+                button.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
-                        Toast.makeText(view.getContext(),
-                                "Button clicked index = " + partyName, Toast.LENGTH_SHORT)
-                                .show();
                         showParty(partyName);
                     }
                 });
@@ -135,8 +131,8 @@ public class CurrentParties extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Hello. Nice try " + partyName, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(CurrentParties.this , ViewParty.class);
         intent.putExtra("partyName", partyName);
+        finish();
         startActivity(intent);
-
     }
 
     @Override
