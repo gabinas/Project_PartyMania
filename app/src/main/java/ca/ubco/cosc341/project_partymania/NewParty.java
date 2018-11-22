@@ -1,31 +1,40 @@
 package ca.ubco.cosc341.project_partymania;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileOutputStream;
+import java.util.Calendar;
 
 public class NewParty extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     EditText title;
     EditText location;
-    Spinner day;
-    Spinner mon;
-    Spinner yea;
+    String date;
+    private static final String TAG = "NewParty";
+
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +42,6 @@ public class NewParty extends AppCompatActivity {
         setContentView(R.layout.activity_new_party);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
-        createSprinners();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,25 +81,37 @@ public class NewParty extends AppCompatActivity {
                 }
         );
 
-    }
+        //DatePicker
+        mDisplayDate = (TextView) findViewById(R.id.time);
 
-    public void createSprinners(){
-        day = findViewById(R.id.day);
-        mon = findViewById(R.id.month);
-        yea = findViewById(R.id.year);
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.day, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.month, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        NewParty.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
 
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: dd/mm/yyy: " + day + "/" + month + "/" + year);
 
-
-        day.setAdapter(adapter1);
-        mon.setAdapter(adapter2);
-        yea.setAdapter(adapter3);
+                date = day + "/" + month + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
     }
 
 
@@ -116,16 +135,9 @@ public class NewParty extends AppCompatActivity {
         String partyLocation = location.getText().toString();
 
         //Getting the Date
-        day = findViewById(R.id.day);
-        mon = findViewById(R.id.month);
-        yea = findViewById(R.id.year);
 
-        String pday = day.getSelectedItem().toString();
-        String pmonth = mon.getSelectedItem().toString();
-        String pyear = yea.getSelectedItem().toString();
 
-        if(partyTitle.length() > 0 && partyLocation.length()>0
-                && pday.length()>0 && pmonth.length() > 0 && pyear.length() > 0){
+        if(partyTitle.length() > 0 && partyLocation.length()>0 && date.length()>0){
             newParty(view);
         } else{
             Toast.makeText(getApplicationContext(), "You must fill all fields", Toast.LENGTH_LONG).show();
@@ -147,13 +159,16 @@ public class NewParty extends AppCompatActivity {
         String partyLocation = location.getText().toString();
 
         //Getting the Date
-        day = findViewById(R.id.day);
-        mon = findViewById(R.id.month);
-        yea = findViewById(R.id.year);
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: dd/mm/yyy: " + day + "/" + month + "/" + year);
 
-        String pday = day.getSelectedItem().toString();
-        String pmonth = mon.getSelectedItem().toString();
-        String pyear = yea.getSelectedItem().toString();
+                date = day + "/" + month + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
 
 
         FileOutputStream outputStream; //allow a file to be opened for writing
@@ -162,7 +177,7 @@ public class NewParty extends AppCompatActivity {
             outputStream.write(fileContents.getBytes());
             outputStream.close();
 
-            fileContents = partyLocation+" \n"+pday+" \n"+pmonth+" \n"+pyear+" \n";
+            fileContents = partyTitle+" \n"+partyLocation+" \n"+date+" \n";
             outputStream= openFileOutput(fileName, Context.MODE_APPEND);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
