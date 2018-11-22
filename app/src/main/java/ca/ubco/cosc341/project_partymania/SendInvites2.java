@@ -10,4 +10,6 @@ public class SendInvites2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_invites2);
     }
+
+
 }
