@@ -44,7 +44,9 @@ public class NewParty extends AppCompatActivity {
                                 finish();
                                 break;
                             case "Current Parties":
-                                Toast.makeText(NewParty.this,"No current parties", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(NewParty.this, CurrentParties.class);
+                                finish();  //Kill the activity from which you will go to next activity
+                                startActivity(intent);
                                 break;
                         }
                         // close drawer when item is tapped
