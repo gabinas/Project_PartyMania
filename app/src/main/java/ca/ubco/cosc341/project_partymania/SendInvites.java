@@ -90,10 +90,16 @@ public class SendInvites extends AppCompatActivity {
             messagetext = findViewById(R.id.messagetext);
         }
         String msg = messagetext.getText().toString();
-        intent.putExtra("timedate",timedate);
-        intent.putExtra("location",location);
-        intent.putExtra("potluck", potluck);
-        intent.putExtra("message",message);
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("timedate",timedate);
+        bundle.putBoolean("location",location);
+        bundle.putBoolean("potluck", potluck);
+        bundle.putBoolean("message",message);
+        bundle.putString("msg", msg);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 
