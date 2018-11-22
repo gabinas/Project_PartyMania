@@ -61,19 +61,28 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/rsvp_detail_b" />
+                    android:text="@string/rsvp_detail_b"
+                    android:background="@color/button_unpressed"
+
+                    />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/rsvp_glist_b" />
+                    android:text="@string/rsvp_glist_b"
+
+                    android:background="@color/button_pressed"
+                    android:clickable="false"
+                    />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/rsvp_review_b" />
+                    android:text="@string/rsvp_review_b"
+                    android:background="@color/button_unpressed"
+                    android:clickable="false"/>
 
 
             </LinearLayout>
@@ -84,6 +93,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <Button
+                    android:onClick="Previous"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
