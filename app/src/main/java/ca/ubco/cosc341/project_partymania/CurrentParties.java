@@ -59,9 +59,12 @@ public class CurrentParties extends AppCompatActivity {
                             case "Home":
                                 finish();
                                 break;
-                            case "Current Parties":
-                                Toast.makeText(CurrentParties.this,"No current parties", Toast.LENGTH_SHORT).show();
+                            case "Create Party":
+                                Intent intent = new Intent(CurrentParties.this, NewParty.class);
+                                finish();
+                                startActivity(intent);
                                 break;
+
                         }
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
@@ -122,12 +125,15 @@ public class CurrentParties extends AppCompatActivity {
         } catch (IOException e){
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "No current parties. Create a new party!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(CurrentParties.this, NewParty.class);
+            finish();
+            startActivity(intent);
         }
     }
 
     private void showParty(String partyName){
-        Toast.makeText(getApplicationContext(), "Hello. Nice try", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(CurrentParties.this , this.getClass());
+        Toast.makeText(getApplicationContext(), "Hello. Nice try " + partyName, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(CurrentParties.this , ViewParty.class);
         intent.putExtra("partyName", partyName);
         startActivity(intent);
 

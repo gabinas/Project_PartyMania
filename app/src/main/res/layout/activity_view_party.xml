@@ -33,7 +33,6 @@
                 android:id="@+id/sendInvites"
                 android:layout_width="162dp"
                 android:layout_height="50dp"
-                android:layout_alignEnd="@+id/home"
                 android:layout_alignTop="@+id/delete"
                 android:text="Send Invites"
                 tools:layout_editor_absoluteX="112dp"
