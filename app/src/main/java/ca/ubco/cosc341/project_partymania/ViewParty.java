@@ -32,7 +32,7 @@ public class ViewParty extends AppCompatActivity {
     TextView name;
     TextView location;
     TextView date;
-    TextView details;
+    TextView time;
 
 
     String filename;
@@ -99,7 +99,7 @@ public class ViewParty extends AppCompatActivity {
         name = (TextView)findViewById(R.id.textName);
         location = (TextView)findViewById(R.id.textLocation);
         date = (TextView)findViewById(R.id.textDate);
-        details = (TextView)findViewById(R.id.textDetails);
+        time = (TextView)findViewById(R.id.textTime);
 
         invite = (Button)findViewById(R.id.sendInvites);
         invite.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class ViewParty extends AppCompatActivity {
             name.setText(list.get(0));
             location.setText(list.get(1));
             date.setText(list.get(2));
-//            details.setText(list.get(3));
+            time.setText(list.get(3));
 
         } catch (IOException e){
             e.printStackTrace();
