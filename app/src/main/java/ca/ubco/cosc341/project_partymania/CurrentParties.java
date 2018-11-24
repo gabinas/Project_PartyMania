@@ -93,14 +93,13 @@ public class CurrentParties extends AppCompatActivity {
             FileInputStream fis= openFileInput("partyTitles.txt");
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
-            String line = "";
+            String line = br.readLine();
 
             int i = 0;
 
 
             // dynamically add buttons for parties
             while (line != null) {
-                line = br.readLine();
                 Button button = new Button(this);
                button.setText(line);
                 button.setId(i);
@@ -114,6 +113,7 @@ public class CurrentParties extends AppCompatActivity {
                     }
                 });
                 i++;
+                line = br.readLine();
             }
             br.close();
         } catch (IOException e){
