@@ -89,13 +89,8 @@ public class SendInvites3 extends AppCompatActivity {
     }
 
     public void Next(View view){
-
-
-
         String[] recipients = emailList.split(",");
         String partyNameInvite = "Invitation to "+partyName;
-
-
 
         Intent intent = new Intent(Intent.ACTION_SEND);
 
@@ -116,7 +111,6 @@ public class SendInvites3 extends AppCompatActivity {
         TextView PTitle = findViewById(R.id.PTitle);
         PTitle.setText(partyName);
         String fileName = partyName.replaceAll("\\s+","")+".txt";
-        Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
         try {
             FileInputStream fis= openFileInput(fileName);
             InputStreamReader isr= new InputStreamReader(fis);
@@ -124,28 +118,19 @@ public class SendInvites3 extends AppCompatActivity {
             String line = "";
             Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
 
+            String title = br.readLine();
+            String where = br.readLine();
+            String when = br.readLine() + " at "+br.readLine();
             // iterate through each line
-            int count = 1;
-            while ( (line  = br.readLine()) != null) {
-                line = br.readLine();
-                switch(count){
-                    case 1:
-                        break;
-                    case 2:
-                        if(location){
-                            TextView Where = findViewById(R.id.Where);
-                            PTitle.setText(line);
-                        }
-                        break;
-                    case 3:
-                        if(timedate){
-                            TextView When = findViewById(R.id.When);
-                            PTitle.setText(line);
-                        }
 
-                        break;
-                }
-                count++;
+            if (location) {
+                TextView Where = findViewById(R.id.Where);
+                Where.setText(where);
+            }
+
+            if(timedate) {
+                TextView When = findViewById(R.id.Where);
+                When.setText(when);
             }
 
             br.close();

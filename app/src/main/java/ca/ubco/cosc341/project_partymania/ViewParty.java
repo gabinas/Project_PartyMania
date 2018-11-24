@@ -35,6 +35,7 @@ public class ViewParty extends AppCompatActivity {
     TextView details;
 
 
+    String partyTitle;
     String filename;
     Button delete;
     Button invite;
@@ -91,7 +92,7 @@ public class ViewParty extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String partyTitle = intent.getStringExtra("partyName");
+        partyTitle = intent.getStringExtra("partyName");
         filename = partyTitle.replaceAll("\\s+","")+".txt";  //Name of the details file
 
 
@@ -143,7 +144,7 @@ public class ViewParty extends AppCompatActivity {
 
         Intent intent = new Intent(this,SendInvites.class);
         Bundle bundle = new Bundle();
-        bundle.putString("partyName",filename);
+        bundle.putString("partyName",partyTitle);
         intent.putExtras(bundle);
         finish();
         startActivity(intent);
