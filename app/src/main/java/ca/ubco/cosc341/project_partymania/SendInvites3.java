@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ public class SendInvites3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_invites3);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
 
         Bundle extras = getIntent().getExtras();
         timedate = extras.getBoolean("timedate");
@@ -46,7 +48,7 @@ public class SendInvites3 extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-
+        ShowPreview();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -114,44 +116,49 @@ public class SendInvites3 extends AppCompatActivity {
         TextView PTitle = findViewById(R.id.PTitle);
         PTitle.setText(partyName);
         String fileName = partyName.replaceAll("\\s+","")+".txt";
+        Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
         try {
             FileInputStream fis= openFileInput(fileName);
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
-            String line = br.readLine();
+            String line = "";
+            Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
 
             // iterate through each line
             int count = 1;
-            while (line != null) {
+            while ( (line  = br.readLine()) != null) {
                 line = br.readLine();
                 switch(count){
                     case 1:
                         break;
                     case 2:
-                        where = line.toString();
                         if(location){
                             TextView Where = findViewById(R.id.Where);
-                            PTitle.setText(where);
+                            PTitle.setText(line);
                         }
                         break;
                     case 3:
-                        when = line.toString();
                         if(timedate){
                             TextView When = findViewById(R.id.When);
-                            PTitle.setText(when);
+                            PTitle.setText(line);
                         }
+
                         break;
                 }
                 count++;
-
             }
+
             br.close();
         } catch (IOException e){
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         if(potluck){
             msg = msg + "\n Bring your own dish! Let's make this party a delicious one!";
         }
-
+        if(message){
+            TextView optionalmessage = findViewById(R.id.Message);
+            optionalmessage.setText(msg);
+        }
     }
 }
