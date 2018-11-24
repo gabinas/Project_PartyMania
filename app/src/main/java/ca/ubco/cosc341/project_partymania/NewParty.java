@@ -1,6 +1,7 @@
 package ca.ubco.cosc341.project_partymania;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.FileOutputStream;
@@ -31,10 +33,14 @@ public class NewParty extends AppCompatActivity {
     EditText title;
     EditText location;
     String date;
+    String time;
     private static final String TAG = "NewParty";
 
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+    private TextView mDisplayTime;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +88,7 @@ public class NewParty extends AppCompatActivity {
         );
 
         //DatePicker
-        mDisplayDate = (TextView) findViewById(R.id.time);
+        mDisplayDate = (TextView) findViewById(R.id.date);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +116,37 @@ public class NewParty extends AppCompatActivity {
 
                 date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
+            }
+        };
+
+
+        //TimePicker
+        mDisplayTime = (TextView) findViewById(R.id.time);
+
+        mDisplayTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minute = cal.get(Calendar.MINUTE);
+
+                TimePickerDialog dialog = new TimePickerDialog(NewParty.this,
+                        mTimeSetListener,
+                        hour,
+                        minute,
+                        false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                Log.d(TAG, "onTimeSet: 00:00: " + hour + ":" + minute );
+
+                time = hour + ":" + minute ;
+                mDisplayTime.setText(time);
             }
         };
     }
@@ -170,6 +207,17 @@ public class NewParty extends AppCompatActivity {
             }
         };
 
+        //Getting the Time
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                Log.d(TAG, "onTimeSet: 00:00: " + hour + ":" + minute );
+
+                time = hour + ":" + minute ;
+                mDisplayTime.setText(time);
+            }
+        };
+
 
         FileOutputStream outputStream; //allow a file to be opened for writing
         try {
@@ -177,7 +225,7 @@ public class NewParty extends AppCompatActivity {
             outputStream.write(fileContents.getBytes());
             outputStream.close();
 
-            fileContents = partyTitle+" \n"+partyLocation+" \n"+date+" \n";
+            fileContents = partyTitle+" \n"+partyLocation+" \n"+date+" \n"+time+" \n";
             outputStream= openFileOutput(fileName, Context.MODE_APPEND);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
