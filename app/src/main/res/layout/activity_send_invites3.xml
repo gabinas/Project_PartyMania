@@ -120,7 +120,7 @@
                 android:id="@+id/When"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="5dp"
+                android:padding="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 app:layout_constraintStart_toStartOf="@+id/HostedBy"
                 app:layout_constraintTop_toBottomOf="@+id/HostedBy" />

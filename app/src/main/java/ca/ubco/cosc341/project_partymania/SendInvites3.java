@@ -88,15 +88,21 @@ public class SendInvites3 extends AppCompatActivity {
         );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     public void Next(View view){
         String[] recipients = emailList.split(",");
-        String partyNameInvite = "Invitation to "+partyName;
+        String partyNameInvite ="Hello Guests! This is an invitation to the party:  "+partyName + "Here is all you need to know:";
         String body = partyNameInvite;
         if(timedate){
-            body = body + ".\nWhen?" +when;
+            body = body + "\nWhen?" +when +"\n";
         }
         if(location){
-            body = body + ". \nWhere is it? \n" + where;
+            body = body + ". \nWhere is it? \n" + where +"\n";
         }
         if(message){
             body = body + ". \nMessage from your host: \n" + msg + ".";
@@ -106,9 +112,11 @@ public class SendInvites3 extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
         intent.putExtra(Intent.EXTRA_SUBJECT, partyNameInvite);
         intent.putExtra(Intent.EXTRA_TEXT, body);
-
         intent.setType("message/rfc822");
+        Intent intent2 = new Intent(this,MainActivity.class);
+        startActivity(intent2);
         startActivity(intent.createChooser(intent, "Choose an email client to send your invitations!"));
+
 
     }
 
