@@ -91,15 +91,24 @@ public class SendInvites3 extends AppCompatActivity {
     public void Next(View view){
         String[] recipients = emailList.split(",");
         String partyNameInvite = "Invitation to "+partyName;
-
+        String body = partyNameInvite;
+        if(timedate){
+            body = body + ".\nWhen?" +when;
+        }
+        if(location){
+            body = body + ". \nWhere is it? \n" + where;
+        }
+        if(message){
+            body = body + ". \nMessage from your host: \n" + msg + ".";
+        }
         Intent intent = new Intent(Intent.ACTION_SEND);
 
-        EditText messagetext = findViewById(R.id.messagetext);
-        String emailList = messagetext.getText().toString();
-        Bundle bundle = new Bundle();
-
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        startActivity(intent);
+        intent.putExtra(Intent.EXTRA_SUBJECT, partyNameInvite);
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+
+        intent.setType("message/rfc822");
+        startActivity(intent.createChooser(intent, "Choose an email client to send your invitations!"));
 
     }
 
@@ -119,18 +128,18 @@ public class SendInvites3 extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
 
             String title = br.readLine();
-            String where = br.readLine();
-            String when = br.readLine() + " at "+br.readLine();
+            where = br.readLine();
+            when = br.readLine() + " at "+br.readLine();
             // iterate through each line
 
             if (location) {
                 TextView Where = findViewById(R.id.Where);
-                Where.setText(where);
+                Where.setText("Meet us at: \n"+where);
             }
 
             if(timedate) {
-                TextView When = findViewById(R.id.Where);
-                When.setText(when);
+                TextView When = findViewById(R.id.When);
+                When.setText("Show up: \n"+when);
             }
 
             br.close();
@@ -139,9 +148,11 @@ public class SendInvites3 extends AppCompatActivity {
             e.printStackTrace();
         }
         if(potluck){
-            msg = msg + "\n Bring your own dish! Let's make this party a delicious one!";
+            pot = "Bring your own dish!\nLet's make this party a delicious one!";
+            msg = msg + "\n" + pot;
         }
         if(message){
+            messageExtra = msg;
             TextView optionalmessage = findViewById(R.id.Message);
             optionalmessage.setText(msg);
         }

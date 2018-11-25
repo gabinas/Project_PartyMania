@@ -119,7 +119,6 @@ public class ViewParty extends AppCompatActivity {
 
             while (line != null) {
                 list.add(line);
-                Toast.makeText(getApplicationContext(), line, Toast.LENGTH_LONG).show();
                 line = br.readLine();
             }
             br.close();
