@@ -1,5 +1,6 @@
 package ca.ubco.cosc341.project_partymania;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import java.io.FileOutputStream;
 
 public class SendInvites2 extends AppCompatActivity {
     boolean timedate, location, potluck, message;
@@ -85,6 +88,19 @@ public class SendInvites2 extends AppCompatActivity {
 
         EditText messagetext = findViewById(R.id.emailList);
         String emailList = messagetext.getText().toString();
+        /**
+        String fileContents = emailList.replaceAll("\\s+"," \n");
+        String fileName = partyName.replaceAll("\\s+","")+".txt";
+
+        FileOutputStream outputStream; //allow a file to be opened for writing
+        try {
+            outputStream= openFileOutput(fileName, Context.MODE_APPEND);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        **/
         Bundle bundle = new Bundle();
         bundle.putBoolean("timedate",timedate);
         bundle.putBoolean("location",location);

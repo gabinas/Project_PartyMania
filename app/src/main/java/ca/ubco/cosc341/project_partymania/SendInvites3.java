@@ -88,23 +88,35 @@ public class SendInvites3 extends AppCompatActivity {
         );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     public void Next(View view){
-
-
-
         String[] recipients = emailList.split(",");
-        String partyNameInvite = "Invitation to "+partyName;
-
-
-
+        String partyNameInvite ="Hello Guests! This is an invitation to the party:  "+partyName + "Here is all you need to know:";
+        String body = partyNameInvite;
+        if(timedate){
+            body = body + "\nWhen?" +when +"\n";
+        }
+        if(location){
+            body = body + ". \nWhere is it? \n" + where +"\n";
+        }
+        if(message){
+            body = body + ". \nMessage from your host: \n" + msg + ".";
+        }
         Intent intent = new Intent(Intent.ACTION_SEND);
 
-        EditText messagetext = findViewById(R.id.messagetext);
-        String emailList = messagetext.getText().toString();
-        Bundle bundle = new Bundle();
-
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        startActivity(intent);
+        intent.putExtra(Intent.EXTRA_SUBJECT, partyNameInvite);
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        intent.setType("message/rfc822");
+        Intent intent2 = new Intent(this,MainActivity.class);
+        startActivity(intent2);
+        startActivity(intent.createChooser(intent, "Choose an email client to send your invitations!"));
+
 
     }
 
@@ -116,7 +128,6 @@ public class SendInvites3 extends AppCompatActivity {
         TextView PTitle = findViewById(R.id.PTitle);
         PTitle.setText(partyName);
         String fileName = partyName.replaceAll("\\s+","")+".txt";
-        Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
         try {
             FileInputStream fis= openFileInput(fileName);
             InputStreamReader isr= new InputStreamReader(fis);
@@ -124,28 +135,19 @@ public class SendInvites3 extends AppCompatActivity {
             String line = "";
             Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
 
+            String title = br.readLine();
+            where = br.readLine();
+            when = br.readLine() + " at "+br.readLine();
             // iterate through each line
-            int count = 1;
-            while ( (line  = br.readLine()) != null) {
-                line = br.readLine();
-                switch(count){
-                    case 1:
-                        break;
-                    case 2:
-                        if(location){
-                            TextView Where = findViewById(R.id.Where);
-                            PTitle.setText(line);
-                        }
-                        break;
-                    case 3:
-                        if(timedate){
-                            TextView When = findViewById(R.id.When);
-                            PTitle.setText(line);
-                        }
 
-                        break;
-                }
-                count++;
+            if (location) {
+                TextView Where = findViewById(R.id.Where);
+                Where.setText("Meet us at: \n"+where);
+            }
+
+            if(timedate) {
+                TextView When = findViewById(R.id.When);
+                When.setText("Show up: \n"+when);
             }
 
             br.close();
@@ -154,9 +156,11 @@ public class SendInvites3 extends AppCompatActivity {
             e.printStackTrace();
         }
         if(potluck){
-            msg = msg + "\n Bring your own dish! Let's make this party a delicious one!";
+            pot = "Bring your own dish!\nLet's make this party a delicious one!";
+            msg = msg + "\n" + pot;
         }
         if(message){
+            messageExtra = msg;
             TextView optionalmessage = findViewById(R.id.Message);
             optionalmessage.setText(msg);
         }

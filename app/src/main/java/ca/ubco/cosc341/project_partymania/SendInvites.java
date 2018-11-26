@@ -93,8 +93,7 @@ public class SendInvites extends AppCompatActivity {
     public void Next(View view){
 
         Intent intent = new Intent(this, SendInvites2.class);
-        EditText messagetext = null;
-        messagetext = findViewById(R.id.messagetext);
+        EditText messagetext = findViewById(R.id.messagetext);
         String msg = messagetext.getText().toString();
 
         Bundle bundle = new Bundle();
@@ -126,12 +125,9 @@ public class SendInvites extends AppCompatActivity {
             case R.id.location:
                 if (checked)
                     location = true;
-                // Cheese me
                 else
                     location = false;
-                // I'm lactose intolerant
                 break;
-
             case R.id.potluck:
                 if(checked)
                     potluck = true;
