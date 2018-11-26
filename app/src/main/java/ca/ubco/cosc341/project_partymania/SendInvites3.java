@@ -105,10 +105,10 @@ public class SendInvites3 extends AppCompatActivity {
             body = body + ". \nWhere is it? \n" + where +"\n";
         }
         if(message){
-            body = body + ". \nMessage from your host: \n" + msg + ".";
+            body = body + ". \nMessage from your host: \n" + msg + "";
         }
         Intent intent = new Intent(Intent.ACTION_SEND);
-
+        Toast.makeText(getApplicationContext(), "Preparing to send invites", Toast.LENGTH_SHORT).show();
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
         intent.putExtra(Intent.EXTRA_SUBJECT, partyNameInvite);
         intent.putExtra(Intent.EXTRA_TEXT, body);
@@ -133,7 +133,7 @@ public class SendInvites3 extends AppCompatActivity {
             InputStreamReader isr= new InputStreamReader(fis);
             BufferedReader br= new BufferedReader(isr);
             String line = "";
-            Toast.makeText(getApplicationContext(), "Attempting to load "+fileName, Toast.LENGTH_SHORT).show();
+
 
             String title = br.readLine();
             where = br.readLine();
