@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="24dp"
-                android:text="Details: "
+                android:text="Time: "
                 android:textSize="22dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -147,16 +147,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/textLocation" />
 
             <TextView
-                android:id="@+id/textDetails"
+                android:id="@+id/textTime"
                 android:layout_width="203dp"
-                android:layout_height="108dp"
+                android:layout_height="46dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="24dp"
                 android:text=" "
                 android:textSize="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.672"
+                app:layout_constraintHorizontal_bias="0.75"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textDate" />
 
