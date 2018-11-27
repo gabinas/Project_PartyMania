@@ -32,17 +32,17 @@
                 android:id="@+id/sendInvites"
                 android:layout_width="162dp"
                 android:layout_height="50dp"
-                android:layout_alignTop="@+id/delete"
+                android:layout_alignTop="@+id/current"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="Send Invites"
-                app:layout_constraintBottom_toTopOf="@+id/delete"
+                app:layout_constraintBottom_toTopOf="@+id/current"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/delete"
+                android:id="@+id/current"
                 android:layout_width="163dp"
                 android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
@@ -50,8 +50,8 @@
                 android:layout_marginBottom="48dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:onClick="deleteParty"
-                android:text="Delete Party"
+                android:onClick="currentParties"
+                android:text="Current Parties"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -62,7 +62,7 @@
                 android:layout_width="106dp"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/delete"
+                android:layout_alignStart="@+id/current"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:text="Location:"
@@ -75,7 +75,7 @@
                 android:layout_width="72dp"
                 android:layout_height="29dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/delete"
+                android:layout_alignStart="@+id/current"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="68dp"
                 android:text="Name:"
@@ -105,16 +105,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="24dp"
-                android:text="Details: "
-                android:textSize="22dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timeLabel" />
 
             <TextView
                 android:id="@+id/textName"
@@ -170,20 +160,6 @@
                 app:layout_constraintHorizontal_bias="0.75"
                 app:layout_constraintStart_toEndOf="@+id/timeLabel"
                 app:layout_constraintTop_toBottomOf="@+id/textDate" />
-
-            <TextView
-                android:id="@+id/textDetails"
-                android:layout_width="203dp"
-                android:layout_height="108dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:text=" "
-                android:textSize="22dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.672"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textTime" />
 
         </android.support.constraint.ConstraintLayout>
 

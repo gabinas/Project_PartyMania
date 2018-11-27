@@ -37,7 +37,7 @@ public class ViewParty extends AppCompatActivity {
 
     String partyTitle;
     String filename;
-    Button delete;
+    Button current;
     Button invite;
 
    // ArrayList<String> data= new ArrayList<>();
@@ -133,10 +133,11 @@ public class ViewParty extends AppCompatActivity {
         }
 
     }
-    public void deleteParty(View view){
-        File file = new File(getFilesDir(),filename+".txt");
-        deleteFile(filename+".txt");
-        Toast.makeText(getApplicationContext(),"File deleted",Toast.LENGTH_SHORT);
+    public void currentParties(View view){
+        Intent intent = new Intent(this,CurrentParties.class);
+        finish();
+        startActivity(intent);
+
     }
 
     public void openSendInvites(){
