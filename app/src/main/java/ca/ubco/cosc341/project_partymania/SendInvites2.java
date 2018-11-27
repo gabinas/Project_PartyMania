@@ -114,6 +114,7 @@ public class SendInvites2 extends AppCompatActivity {
     }
 
     public void Previous(View view){
+
         finish();
     }
 
