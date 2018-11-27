@@ -144,8 +144,11 @@ public class NewParty extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 Log.d(TAG, "onTimeSet: 00:00: " + hour + ":" + minute );
-
-                time = hour + ":" + minute ;
+                if(minute < 10){
+                    time = hour + ":0" + minute ;
+                } else {
+                    time = hour + ":" + minute;
+                }
                 mDisplayTime.setText(time);
             }
         };
@@ -163,7 +166,7 @@ public class NewParty extends AppCompatActivity {
     }
 
     public void confirm(View view){
-        //Getting the Title
+        //Getting the title
         title = findViewById(R.id.title);
         String partyTitle = title.getText().toString();
 
@@ -172,9 +175,27 @@ public class NewParty extends AppCompatActivity {
         String partyLocation = location.getText().toString();
 
         //Getting the Date
+        mDisplayDate = findViewById(R.id.date);
+        date = mDisplayDate.getText().toString();
+        boolean dateBol;
+        if(date.equals("DD/MM/YY")){
+            dateBol = false;
+        } else {
+            dateBol = true;
+        }
+
+        //Getting the Time
+        mDisplayTime = findViewById(R.id.time);
+        time = mDisplayTime.getText().toString();
+        boolean timeBol;
+        if(time.equals("00:00")){
+            timeBol = false;
+        } else {
+            timeBol = true;
+        }
 
 
-        if(partyTitle.length() > 0 && partyLocation.length()>0 && date.length()>0){
+        if(partyTitle.length() > 0 && partyLocation.length()>0 && date.length()>0 && dateBol && timeBol){
             newParty(view);
         } else{
             Toast.makeText(getApplicationContext(), "You must fill all fields", Toast.LENGTH_LONG).show();
@@ -212,8 +233,11 @@ public class NewParty extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 Log.d(TAG, "onTimeSet: 00:00: " + hour + ":" + minute );
-
-                time = hour + ":" + minute ;
+                if(minute < 10){
+                    time = hour + ":0" + minute ;
+                } else {
+                    time = hour + ":" + minute;
+                }
                 mDisplayTime.setText(time);
             }
         };

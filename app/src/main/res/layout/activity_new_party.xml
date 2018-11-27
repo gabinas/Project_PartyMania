@@ -99,7 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="DD//MM//YY"
+                    android:hint="DD/MM/YY"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                     android:textSize="18dp" />
 
