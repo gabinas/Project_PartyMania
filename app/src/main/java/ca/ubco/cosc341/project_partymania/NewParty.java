@@ -179,6 +179,7 @@ public class NewParty extends AppCompatActivity {
         date = mDisplayDate.getText().toString();
         boolean dateBol;
         if(date.equals("DD/MM/YY")){
+            Toast.makeText(getApplicationContext(), "There is no date chosen", Toast.LENGTH_LONG).show();
             dateBol = false;
         } else {
             dateBol = true;
@@ -186,16 +187,18 @@ public class NewParty extends AppCompatActivity {
 
         //Getting the Time
         mDisplayTime = findViewById(R.id.time);
+        String hint =mDisplayTime.getHint().toString();
         time = mDisplayTime.getText().toString();
         boolean timeBol;
-        if(time.equals("00:00")){
+        if(time.equals(hint)){
+            Toast.makeText(getApplicationContext(), "There is no time chosen", Toast.LENGTH_LONG).show();
             timeBol = false;
         } else {
             timeBol = true;
         }
 
 
-        if(partyTitle.length() > 0 && partyLocation.length()>0 && date.length()>0 && dateBol && timeBol){
+        if(partyTitle.length() > 0 && partyLocation.length()>0 && date.length()>0 && time.length()>0){
             newParty(view);
         } else{
             Toast.makeText(getApplicationContext(), "You must fill all fields", Toast.LENGTH_LONG).show();

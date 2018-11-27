@@ -18,6 +18,7 @@ public class SendInvites2 extends AppCompatActivity {
     boolean timedate, location, potluck, message;
     String msg, partyName;
     private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +30,12 @@ public class SendInvites2 extends AppCompatActivity {
         location = extras.getBoolean("location");
         potluck = extras.getBoolean("potluck");
         message = extras.getBoolean("message");
+
         if(message)
             msg = extras.getString("msg");
         else
             msg = "";
+
         partyName = extras.getString("partyName");
 
 
