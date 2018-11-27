@@ -102,10 +102,10 @@ public class SendInvites3 extends AppCompatActivity {
             body = body + "\nWhen?" +when +"\n";
         }
         if(location){
-            body = body + ". \nWhere is it? \n" + where +"\n";
+            body = body + "\nWhere is it? \n" + where +"\n";
         }
         if(message){
-            body = body + ". \nMessage from your host: \n" + msg + "";
+            body = body + "\nMessage from your host: \n" + msg + "";
         }
         Intent intent = new Intent(Intent.ACTION_SEND);
         Toast.makeText(getApplicationContext(), "Preparing to send invites", Toast.LENGTH_SHORT).show();
